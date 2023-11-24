@@ -19,20 +19,20 @@ Queue *queue_init() {
   internal->head = NULL;
   internal->tail = NULL;
   Queue *self = malloc(sizeof(Queue));
-  self->internal = internal;
+  self->_internal = internal;
   return self;
 }
 
-bool queue_is_empty(Queue *self) {
-  _Queue *internal = self->internal;
+bool queue_is_empty(Queue const *self) {
+  _Queue *internal = self->_internal;
   if (internal->head == NULL)
     return true;
   else
     return false;
 }
 
-void queue_print(Queue *self) {
-  _Queue *internal = self->internal;
+void queue_print(Queue const *self) {
+  _Queue *internal = self->_internal;
   _Node *curr = internal->head;
   printf("out <- [ ");
   while (curr != NULL) {
@@ -43,7 +43,7 @@ void queue_print(Queue *self) {
 }
 
 void queue_add(Queue *self, int val) {
-  _Queue *internal = self->internal;
+  _Queue *internal = self->_internal;
   _Node *new_node = malloc(sizeof(_Node));
   *new_node = (_Node){.val = val, .next = NULL};
   if (internal->tail != NULL) {
@@ -56,7 +56,7 @@ void queue_add(Queue *self, int val) {
 }
 
 int queue_remove(Queue *self) {
-  _Queue *internal = self->internal;
+  _Queue *internal = self->_internal;
   _Node *node = internal->head;
   int res = node->val;
   if (internal->head == internal->tail) {
@@ -67,13 +67,13 @@ int queue_remove(Queue *self) {
   return res;
 }
 
-int queue_peek(Queue *self) {
-  _Queue *internal = self->internal;
+int queue_peek(Queue const *self) {
+  _Queue *internal = self->_internal;
   return internal->head->val;
 }
 
 void queue_deinit(Queue *self) {
-  _Queue *internal = self->internal;
+  _Queue *internal = self->_internal;
   _Node *curr = internal->head;
   while (curr != NULL) {
     _Node *temp = curr->next;
