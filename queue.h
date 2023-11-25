@@ -1,7 +1,7 @@
 #ifndef QUEUE
 #define QUEUE
 
-#define INITIAL_CAPACITY 2
+#define INITIAL_CAPACITY 10
 
 #include <stdbool.h>
 
